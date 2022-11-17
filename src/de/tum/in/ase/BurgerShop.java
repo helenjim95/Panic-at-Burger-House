@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class BurgerShop {
     private Stock stock;
-    private Queue<Burger> orders;
+    private List<Burger> orders;
     public BurgerShop() {
         this.stock = new Stock();
         this.orders = new LinkedList<>();
@@ -25,10 +25,11 @@ public class BurgerShop {
         StockIngredient stockIngredient = stock.findStockIngredient(ingredientName);
         if (stockIngredient == null) {
             StockIngredient newStockIngredient = new StockIngredient(ingredientName, ingredientPrice, deliverdQuantity);
-            stock.addStockIngredient(newStockIngredient);
-        }
-        for (int i = 0; i < deliverdQuantity; i++) {
-            stock.add(ingredientName);
+            stock.addtoStockIngredients(newStockIngredient);
+        } else {
+            for (int i = 0; i < deliverdQuantity; i++) {
+                stock.add(ingredientName);
+            }
         }
     }
 
@@ -48,7 +49,7 @@ public class BurgerShop {
         List<StockIngredient> stockIngredientList = stock.getStockIngredients();
         while (!orders.isEmpty()) {
             boolean isReady = true;
-            Burger burger = orders.peek();
+            Burger burger = orders.get(0);
             List<String> ingredients = burger.getIngredients();
             for (String ingredient : ingredients) {
                 StockIngredient stockIngredient = stock.findStockIngredient(ingredient);
@@ -65,7 +66,7 @@ public class BurgerShop {
                 }
             }
             if (isReady) {
-                System.out.printf("The order is ready: %s", burger.getName());
+                System.out.printf("The order is ready: %s%n", burger.getName());
                 orders.remove(burger);
             }
         }

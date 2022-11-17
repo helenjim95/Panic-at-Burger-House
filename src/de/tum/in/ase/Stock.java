@@ -18,29 +18,29 @@ public class Stock {
         this.stockIngredients = stockIngredientList;
     }
 
-    public void addStockIngredient(StockIngredient stockIngredient) {
+    public void addtoStockIngredients(StockIngredient stockIngredient) {
         stockIngredients.add(stockIngredient);
     }
     public int add(String stock) {
-        if (!stockIngredients.contains(stock)) {
+        StockIngredient stockIngredient = findStockIngredient(stock);
+        if (stockIngredient == null) {
             return -1;
         } else {
-            StockIngredient stockIngredient = findStockIngredient(stock);
             stockIngredient.setQuantity(stockIngredient.getQuantity() + 1);
             return stockIngredient.getQuantity();
         }
     }
     public int take(String stock) {
-        if (!stockIngredients.contains(stock)) {
+        StockIngredient stockIngredient = findStockIngredient(stock);
+        if (stockIngredient == null) {
             return -1;
         } else {
-            StockIngredient stockIngredient = findStockIngredient(stock);
             if (stockIngredient.getQuantity() == 0) {
                 return -1;
             } else {
                 stockIngredient.setQuantity(stockIngredient.getQuantity() - 1);
+                return stockIngredient.getQuantity();
             }
-            return stockIngredient.getQuantity();
         }
     }
     public StockIngredient findStockIngredient(String stock) {
