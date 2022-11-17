@@ -5,25 +5,24 @@ import java.util.List;
 
 public class Stock {
 
-    private List<StockIngredient> stockIngredientList;
-//    private StockIngredient stockIngredient;
+    private List<StockIngredient> stockIngredients;
 
     public Stock() {
-        this.stockIngredientList = new ArrayList<StockIngredient>();
+        this.stockIngredients = new ArrayList<>();
     }
-    public List<StockIngredient> getStockIngredientList() {
-        return stockIngredientList;
-    }
-
-    public void setStockIngredientList(List<StockIngredient> stockIngredientList) {
-        this.stockIngredientList = stockIngredientList;
+    public List<StockIngredient> getStockIngredients() {
+        return stockIngredients;
     }
 
-    public void addstockIngredient(StockIngredient stockIngredient) {
-        stockIngredientList.add(stockIngredient);
+    public void setStockIngredients(List<StockIngredient> stockIngredientList) {
+        this.stockIngredients = stockIngredientList;
+    }
+
+    public void addStockIngredient(StockIngredient stockIngredient) {
+        stockIngredients.add(stockIngredient);
     }
     public int add(String stock) {
-        if (!stockIngredientList.contains(stock)) {
+        if (!stockIngredients.contains(stock)) {
             return -1;
         } else {
             StockIngredient stockIngredient = findStockIngredient(stock);
@@ -32,7 +31,7 @@ public class Stock {
         }
     }
     public int take(String stock) {
-        if (!stockIngredientList.contains(stock)) {
+        if (!stockIngredients.contains(stock)) {
             return -1;
         } else {
             StockIngredient stockIngredient = findStockIngredient(stock);
@@ -45,7 +44,7 @@ public class Stock {
         }
     }
     public StockIngredient findStockIngredient(String stock) {
-        for (StockIngredient stockIngredient : stockIngredientList) {
+        for (StockIngredient stockIngredient : stockIngredients) {
             if (stock.equals(stockIngredient.getName())) {
                 return stockIngredient;
             }

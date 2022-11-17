@@ -5,10 +5,10 @@ import java.util.Queue;
 
 public class BurgerShop {
     private Stock stock;
-    private Queue<Burger> orderList;
+    private Queue<Burger> orders;
     public BurgerShop() {
         this.stock = new Stock();
-        this.orderList = new LinkedList<>();
+        this.orders = new LinkedList<>();
     }
 
     public int calculateTotalPrice(Burger burger) {
@@ -25,7 +25,7 @@ public class BurgerShop {
         StockIngredient stockIngredient = stock.findStockIngredient(ingredientName);
         if (stockIngredient == null) {
             StockIngredient newStockIngredient = new StockIngredient(ingredientName, ingredientPrice, deliverdQuantity);
-            stock.addstockIngredient(newStockIngredient);
+            stock.addStockIngredient(newStockIngredient);
         }
         for (int i = 0; i < deliverdQuantity; i++) {
             stock.add(ingredientName);
@@ -36,7 +36,7 @@ public class BurgerShop {
     // each order can consist of only one burger.
     // FIFO (First In, First Out)
 //        The orderBurger method should add the burger to the list of orders and then make a call to the checkOrderReady()
-        orderList.add(burger);
+        orders.add(burger);
         checkOrderReady();
     }
 
@@ -45,10 +45,10 @@ public class BurgerShop {
 //        checkOrderReady() serves as many burgers as possible until either:
             //the order queue is empty or
             //one order cannot be served due to missing ingredients.
-        List<StockIngredient> stockIngredientList = stock.getStockIngredientList();
-        while (!orderList.isEmpty()) {
+        List<StockIngredient> stockIngredientList = stock.getStockIngredients();
+        while (!orders.isEmpty()) {
             boolean isReady = true;
-            Burger burger = orderList.peek();
+            Burger burger = orders.peek();
             List<String> ingredients = burger.getIngredients();
             for (String ingredient : ingredients) {
                 StockIngredient stockIngredient = stock.findStockIngredient(ingredient);
@@ -66,7 +66,7 @@ public class BurgerShop {
             }
             if (isReady) {
                 System.out.printf("The order is ready: %s", burger.getName());
-                orderList.remove(burger);
+                orders.remove(burger);
             }
         }
     }

@@ -40,7 +40,7 @@ public class StockIngredient {
     }
 
     public void setQuantity(int quantity) {
-        if (price < 0) {
+        if (quantity < 0) {
             this.quantity = 0;
         } else {
             this.quantity = quantity;
