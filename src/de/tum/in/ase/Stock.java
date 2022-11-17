@@ -22,19 +22,19 @@ public class Stock {
         stockIngredients.add(stockIngredient);
     }
     public int add(String stock) {
-        StockIngredient stockIngredient = findStockIngredient(stock);
-        if (stockIngredient == null) {
+        if (findStockIngredient(stock) == null) {
             return -1;
         } else {
+            StockIngredient stockIngredient = findStockIngredient(stock);
             stockIngredient.setQuantity(stockIngredient.getQuantity() + 1);
             return stockIngredient.getQuantity();
         }
     }
     public int take(String stock) {
-        StockIngredient stockIngredient = findStockIngredient(stock);
-        if (stockIngredient == null) {
+        if (findStockIngredient(stock) == null) {
             return -1;
         } else {
+            StockIngredient stockIngredient = findStockIngredient(stock);
             if (stockIngredient.getQuantity() == 0) {
                 return -1;
             } else {
